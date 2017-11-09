@@ -203,7 +203,7 @@ function make_slides(f) {
 
 /// init ///
 function init() {
-  var conditions = [["RFR","knowledgeable"],["RFR","ignorant"]];//_.shuffle(["RFR","neutral","filler"]);
+  var conditions = [["RFR","knowledgeable"]];//,["RFR","ignorant"]];//_.shuffle(["RFR","neutral","filler"]);
   exp.all_stims = [];
   exp.data_trials = [];
 
