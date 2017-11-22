@@ -28,7 +28,6 @@ function make_slides(f) {
       exp.sliderPost = {};
       $("#audio_player").data("num-plays", 0);
 
-      console.log("Trial: " + stim.audio);
       $("#error_audio").hide();
       // $("#attention_check").hide();
       // $("#speakerutt").hide();
@@ -45,12 +44,12 @@ function make_slides(f) {
       // $("#audio_src_ogg").attr("src", 'audio/'+ stim.audio + '.ogg');//XXX
       // $("#audio_src_wav").attr("src", 'audio/strenuous-RFR.wav');//XXX
       // $("#audio_src_ogg").attr("src", 'audio/'+ stim.audio + '.ogg');//XXX
-      $("#audio_src_wav").attr("src", 'audio/'+ stim.audio + "-" + stim.pcondition + '.wav');
+      $("#audio_src_wav").attr("src", 'audio/'+ stim.weak_adjective + "." + stim.pcondition + "." + stim.kcondition + '.wav');
 
       var context = stim.context; 
       var question = stim.question; 
       var speakerutt = stim.speakerutt; 
-      var exchange = stim.exchange; 
+      var exchange = stim.exchange + "<br>" + stim.answer; 
       var responsequestion = stim.responsequestion;// +"<br>Please adjust the slider to indicate your answer.";
       
       $("#context").html(context);
@@ -133,9 +132,14 @@ function make_slides(f) {
       exp.data_trials.push({
           "condition_prosody": this.stim.pcondition,
           "condition_knowledge": this.stim.kcondition,
-          "adjective" : this.stim.audio,
+          "weak_adjective" : this.stim.weak_adjective,
+          "strong_adjective" : this.stim.strong_adjective,
           "not_paid_attention": this.not_paid_attention,
           "pre_check_response": this.pre_check_response,
+          "context": this.stim.context,
+          "question": this.stim.question,
+          "exchange": this.stim.exchange,
+          "responsequestion": this.stim.responsequestion,
           "time": (new Date()) - this.trial_start,
           "response": exp.sliderPost,
           "num_plays": $("#audio_player").data("num-plays")
@@ -182,28 +186,48 @@ function make_slides(f) {
 }
 
   function makeStim(rawstim,cond) {
+
+    var name = cond[1] == "know" ? "Mike" : "Stan";
+    var speakerutt = name + " " + rawstim.speakerutt;
+    var exchange = cond[1] == "know" ? rawstim.kexchange : rawstim.iexchange;
+    var responsequestion = cond[1] == "know" ? rawstim.kresponsequestion : rawstim.iresponsequestion;
+
+    if (cond[0] != "filler") {
+      exchange = exchange + " " + rawstim.audio_filler + "?";  
+      var answer = rawstim.answer +  " " + rawstim.audio_target + ".<strong>";
+      responsequestion = responsequestion + " " + rawstim.audio_filler + "?";
+    } else {
+      exchange = exchange + " " + rawstim.audio_target + "?";  
+      var answer = rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
+      responsequestion = responsequestion + " " + rawstim.audio_target + "?";
+    }
+
     var stim = {
-      audio: rawstim.audio,
+      weak_adjective: rawstim.audio_target,
+      strong_adjective: rawstim.audio_filler,
       question: rawstim.question,
-      speakerutt: rawstim.speakerutt,
-      exchange: rawstim.exchange,
-      responsequestion: rawstim.responsequestion
+      speakerutt: speakerutt,
+      exchange: exchange,
+      responsequestion: responsequestion,
+      answer: answer
     };
+
     stim.pcondition = cond[0];
     stim.kcondition = cond[1];
-    if (cond[1] == "knowledgeable") {
+    if (cond[1] == "know") {
       stim.rightanswer = "yes";
       stim.context = rawstim.kcontext;
     } else {
         stim.rightanswer = "no";
         stim.context = rawstim.icontext;
     }
+
     exp.all_stims.push(stim);
   }
 
 /// init ///
 function init() {
-  var conditions = [["RFR","knowledgeable"]];//,["RFR","ignorant"]];//_.shuffle(["RFR","neutral","filler"]);
+  var conditions = _.shuffle([["RFR","know"],["filler","ignorant"]]);//["RFR","ignorant"],["neutral","know"],["neutral","ignorant"],["filler","know"],["filler","ignorant"]]);
   exp.all_stims = [];
   exp.data_trials = [];
 
