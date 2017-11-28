@@ -227,7 +227,15 @@ function make_slides(f) {
 
 /// init ///
 function init() {
-  var conditions = _.shuffle([["RFR","know"],["filler","ignorant"]]);//["RFR","ignorant"],["neutral","know"],["neutral","ignorant"],["filler","know"],["filler","ignorant"]]);
+  var conditions = _.shuffle([["RFR","know"],["RFR","know"],["RFR","know"],
+  ["RFR","ignorant"],["RFR","ignorant"],["RFR","ignorant"],
+  ["neutral","know"],["neutral","know"],["neutral","know"],
+  ["neutral","ignorant"],["neutral","ignorant"],["neutral","ignorant"],
+  ["filler","ignorant"],["filler","ignorant"],
+  ["filler","know"],["filler","know"],
+  ["control","know"],["control","know"],["control","know"],
+  ["control","ignorant"],["control","ignorant"],["control","ignorant"],
+  ]);
   exp.all_stims = [];
   exp.data_trials = [];
 
@@ -236,6 +244,8 @@ function init() {
   for (j = 0; j< conditions.length; j++) {
     makeStim(stims[j],conditions[j]);
   }
+
+  // CONITNUE HERE: MAY HAVE TO MAKE CONTROL STIMS SEPARATELY (ANTONYM PAIRS)
 
   console.log(exp.all_stims);
  
