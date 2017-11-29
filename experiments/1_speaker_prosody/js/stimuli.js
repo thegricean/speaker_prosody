@@ -217,6 +217,20 @@ var stimuli = [
   iresponsequestion: "Does Julie mean that his bathroom was",
 }
 
+// target hungry
+  {audio_target: "hungry",
+  audio_filler: "starving",
+  icontext: "Mike forgets to feed the dog in the morning before he goes to work, so he asks his roommate to do it. At lunch break, Mike calls his roomate to see if everything is ok and tells his friend Julie about it. Later, Julie hangs out with her boyfriend Stan. Julie tells Stan about what she heard about Mike’s dog situation", 
+  kcontext: "Stan forgets to feed the dog in the morning before he goes to work, so he asks his girlfriend Julie to do it during her lunch break. On her way back to work and annoyed that she couldn't eat lunch with her colleagues, she sees her friend Mike and tells him about feeding the dog. ", 
+  question: "Did Julie feed a dog?",  
+  speakerutt: "then asks Julie:", 
+  kexchange:: "Mike: Was your dog",
+  iexchange:: "Stan: Was his dog",
+  answer: "Julie: <strong>She's",
+  kresponsequestion: "Does Julie mean that her dog was",
+  iresponsequestion: "Does Julie mean that his dog was",
+
+
 
   // control cheap
 {audio_target: "cheap",
