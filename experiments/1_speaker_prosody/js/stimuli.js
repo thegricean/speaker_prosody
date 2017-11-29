@@ -166,7 +166,7 @@ var stimuli = [
   question: "Did Julie go on a hike?",  
   speakerutt: "then asks Julie:", 
   kexchange: "Mike: Was your hike",
-  iexchange: "Mike: Was his hike”,
+  iexchange: "Stan: Was his hike",
   answer: "Julie: <strong>It was",
   kresponsequestion: "Does Julie mean that her hike was",
   iresponsequestion: "Does Julie mean that his hike was",
