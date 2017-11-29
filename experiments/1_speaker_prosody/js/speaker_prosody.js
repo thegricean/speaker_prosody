@@ -186,6 +186,7 @@ function make_slides(f) {
 }
 
   function makeStim(rawstim,cond) {
+    // console.log(rawstim.audio_target);
 
     var name = cond[1] == "know" ? "Mike" : "Stan";
     var speakerutt = name + " " + rawstim.speakerutt;
@@ -225,6 +226,41 @@ function make_slides(f) {
     exp.all_stims.push(stim);
   }
 
+  function makeControlStim(rawstim,cond) {
+
+    var name = cond == "know" ? "Mike" : "Stan";
+    var speakerutt = name + " " + rawstim.speakerutt;
+    var exchange = cond == "know" ? rawstim.kexchange : rawstim.iexchange;
+    var responsequestion = cond == "know" ? rawstim.kresponsequestion : rawstim.iresponsequestion;
+
+    exchange = exchange + " " + rawstim.audio_target + "?";  
+    var answer = rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
+    responsequestion = responsequestion + " " + rawstim.audio_target + "?";
+
+
+    var stim = {
+      weak_adjective: rawstim.audio_target,
+      strong_adjective: rawstim.audio_filler,
+      question: rawstim.question,
+      speakerutt: speakerutt,
+      exchange: exchange,
+      responsequestion: responsequestion,
+      answer: answer
+    };
+
+    stim.pcondition = "control";
+    stim.kcondition = cond;
+    if (cond == "know") {
+      stim.rightanswer = "yes";
+      stim.context = rawstim.kcontext;
+    } else {
+        stim.rightanswer = "no";
+        stim.context = rawstim.icontext;
+    }
+
+    exp.all_stims.push(stim);
+  }  
+
 /// init ///
 function init() {
   var conditions = _.shuffle([["RFR","know"],["RFR","know"],["RFR","know"],
@@ -232,20 +268,30 @@ function init() {
   ["neutral","know"],["neutral","know"],["neutral","know"],
   ["neutral","ignorant"],["neutral","ignorant"],["neutral","ignorant"],
   ["filler","ignorant"],["filler","ignorant"],
-  ["filler","know"],["filler","know"],
-  ["control","know"],["control","know"],["control","know"],
-  ["control","ignorant"],["control","ignorant"],["control","ignorant"],
+  ["filler","know"],["filler","know"]
   ]);
+
+  var control_conditions = _.shuffle(["know","know","know","ignorant","ignorant","ignorant"]);
   exp.all_stims = [];
   exp.data_trials = [];
 
+// console.log(stimuli);
+
   var stims = _.shuffle(stimuli); //can randomize between subject conditions here
-  
+  // var stims = stimuli;
+
   for (j = 0; j< conditions.length; j++) {
     makeStim(stims[j],conditions[j]);
   }
 
-  // CONITNUE HERE: MAY HAVE TO MAKE CONTROL STIMS SEPARATELY (ANTONYM PAIRS)
+
+  for (k = 0; k< controls.length; k++) {
+    makeControlStim(controls[k],control_conditions[k]);
+  }
+
+console.log(exp.all_stims);
+
+  exp.all_stims = _.shuffle(exp.all_stims);
 
   console.log(exp.all_stims);
  
