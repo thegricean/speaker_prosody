@@ -42,6 +42,13 @@ d = d %>%
   select(workerid,weak_adjective,strong_adjective,condition_knowledge,condition_prosody,response,not_paid_attention,responsequestion,exchange,question,pre_check_response,context,num_plays,age,language,asses,gender,comments,Answer.time_in_minutes) # slide_number_in_experiment
 nrow(d) 
 
+# look at overall distribution of responses
+ggplot(d, aes(x=response)) +
+  geom_histogram()
+
+ggplot(d, aes(x=response,fill=condition_prosody)) +
+  geom_histogram()
+
 # exclude participants with means above .4 on controls (very generous)
 no_attention = d %>%
   group_by(workerid,condition_knowledge,condition_prosody) %>%
