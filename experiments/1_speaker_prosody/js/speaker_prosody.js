@@ -141,6 +141,7 @@ function make_slides(f) {
           "exchange": this.stim.exchange,
           "responsequestion": this.stim.responsequestion,
           "time": (new Date()) - this.trial_start,
+          "slide_number_in_experiment" : exp.phase,
           "response": exp.sliderPost,
           "num_plays": $("#audio_player").data("num-plays")
         });
