@@ -1,8 +1,8 @@
+# load helper functions
 source('helpers.R')
 
 # load required packages
 library(tidyverse)
-library(RColorBrewer)
 library(forcats)
 theme_set(theme_bw())
 
