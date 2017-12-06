@@ -7,7 +7,7 @@ library(forcats)
 theme_set(theme_bw())
 
 # load raw data
-d = read.csv("../data/speaker_prosody.csv")
+d = read.csv("../data/speaker_prosody2.csv")
 nrow(d)
 length(unique(d$workerid))
 
@@ -16,13 +16,11 @@ length(unique(d$workerid))
 # experiment completion times
 mean(d$Answer.time_in_minutes) 
 median(d$Answer.time_in_minutes)
-ggplot(d, aes(x=Answer.time_in_minutes)) +
-  geom_histogram()
 
 # look at participants' comments
 unique(d$comments)
 
-# did participants feel they understoody the task?
+# did participants feel they understood the task?
 table(d$asses)
 
 # did participants enjoy the hit? 0 - 2
@@ -41,7 +39,7 @@ ggplot(d, aes(x=age)) +
 
 
 d = d %>%
-  select(workerid,weak_adjective,strong_adjective,condition_knowledge,condition_prosody,response,not_paid_attention,responsequestion,exchange,question,pre_check_response,context,num_plays,age,language,asses,gender,comments,Answer.time_in_minutes) # slide_number_in_experiment
+  select(workerid,weak_adjective,strong_adjective,condition_knowledge,condition_prosody,response,not_paid_attention,responsequestion,exchange,question,pre_check_response,context,num_plays,age,language,asses,gender,comments,Answer.time_in_minutes, slide_number_in_experiment)
 nrow(d) 
 
 # look at overall distribution of responses
@@ -68,13 +66,13 @@ d = d %>%
 agr = d %>%
   group_by(condition_knowledge,condition_prosody) %>%
   summarize(Mean = mean(response), CILow = ci.low(response), CIHigh = ci.high(response)) %>%
-  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh, condition_prosody = fct_relevel(condition_prosody, c("control","RFR","neutral","filler")))
+  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh, condition_prosody = fct_relevel(condition_prosody, c("control","L+H","neutral","filler")))
 
 # get condition & subject means
 agr_subj = d %>%
   group_by(workerid,condition_knowledge,condition_prosody) %>%
   summarize(Mean = mean(response), CILow = ci.low(response), CIHigh = ci.high(response)) %>%
-  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh, condition_prosody = fct_relevel(condition_prosody, c("control","RFR","neutral","filler"))) %>%
+  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh, condition_prosody = fct_relevel(condition_prosody, c("control","L+H","neutral","filler"))) %>%
   ungroup() %>%
   mutate(workerid = fct_drop(as.factor(workerid)))
 
@@ -93,7 +91,7 @@ ggsave("../graphs/means_subj.pdf")
 agr_item = d %>%
   group_by(weak_adjective,condition_knowledge,condition_prosody) %>%
   summarize(Mean = mean(response), CILow = ci.low(response), CIHigh = ci.high(response)) %>%
-  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh, condition_prosody = fct_relevel(condition_prosody, c("control","RFR","neutral","filler"))) 
+  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh, condition_prosody = fct_relevel(condition_prosody, c("control","L+H","neutral","filler"))) 
 
 dodge = position_dodge(.9)
 
@@ -111,7 +109,7 @@ ggsave("../graphs/means_item.pdf",width=9)
 
 # exclude uninteresting filler/control conditions and center predictors
 cd = d %>% 
-  filter(condition_prosody %in% c("neutral","RFR")) %>%
+  filter(condition_prosody %in% c("neutral","L+H")) %>%
   mutate(condition_prosody = fct_drop(condition_prosody)) %>%
   mutate(ccondition_knowledge = myCenter(condition_knowledge), ccondition_prosody = myCenter(condition_prosody))
 
