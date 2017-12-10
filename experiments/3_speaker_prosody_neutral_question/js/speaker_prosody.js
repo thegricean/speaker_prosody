@@ -195,11 +195,9 @@ function make_slides(f) {
     var responsequestion = cond[1] == "know" ? rawstim.kresponsequestion : rawstim.iresponsequestion;
 
     if (cond[0] != "filler") {
-      exchange = exchange + " " + rawstim.audio_filler + "?";  
       var answer = rawstim.answer +  " " + rawstim.audio_target + ".<strong>";
       responsequestion = responsequestion + " " + rawstim.audio_filler + "?";
     } else {
-      exchange = exchange + " " + rawstim.audio_target + "?";  
       var answer = rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
       responsequestion = responsequestion + " " + rawstim.audio_target + "?";
     }
@@ -234,7 +232,6 @@ function make_slides(f) {
     var exchange = cond == "know" ? rawstim.kexchange : rawstim.iexchange;
     var responsequestion = cond == "know" ? rawstim.kresponsequestion : rawstim.iresponsequestion;
 
-    exchange = exchange + " " + rawstim.audio_target + "?";  
     var answer = rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
     responsequestion = responsequestion + " " + rawstim.audio_target + "?";
 

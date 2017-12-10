@@ -52,7 +52,7 @@ var stimuli = [
   speakerutt: "then asks Julie:", 
   kexchange: "Mike: What is your new blog post like?",
   iexchange: "Stan: What is his new blog post like?",
-  answer: "Julie: <strong>It was",
+  answer: "Julie: <strong>It's",
   kresponsequestion: "Does Julie mean that her blog post was",
   iresponsequestion: "Does Julie mean that his blog post was"
 },
@@ -107,8 +107,8 @@ var stimuli = [
   kcontext: "Julie is an amateur kickboxer and had just got back from a regional tournement. She did well, but lost in the semifinals. It was a touch match, but it reaffirmed her passion for kickboxing and she was proud of herself for making for making it so far in the competition. Later in the week, Julie sees her friend Mike and tells him about her last fight.", 
   question: "Does Julie like kickboxing?",   
   speakerutt: "then asks Julie:", 
-  kexchange: "Mike: What was your opponent like in the ring?",
-  iexchange: "Stan: What was his opponent like in the ring",
+  kexchange: "Mike: What was your last opponent in the ring like?",
+  iexchange: "Stan: What was his last opponent in the ring like?",
   answer: "Julie: <strong>He was",
   kresponsequestion: "Does Julie mean that her opponent was",
   iresponsequestion: "Does Julie mean that his opponent was"
