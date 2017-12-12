@@ -147,6 +147,7 @@ ggplot(sreffects,aes(x=Slope_biased,y=Slope_neutral,color=Adjective)) +
   geom_vline(xintercept=0,alpha=.5) +
   geom_abline(intercept=0,slope=1,color="gray60",linetype="dashed") +
   geom_point() +
+  geom_text(aes(label=Adjective),color="gray60",size=2,vjust=1.5) +
   xlab("Prosody slopes for Exp 1 (biased question)") +
   ylab("Prosody slopes for Exp 3 (neutral question)")
 ggsave("../graphs/exp1vs3-slopecorrelation.pdf",width=6.5,height=4.5)
@@ -157,6 +158,7 @@ ggplot(sreffects,aes(x=Intercept_biased,y=Intercept_neutral,color=Adjective)) +
   geom_vline(xintercept=0,alpha=.5) +
   geom_abline(intercept=0,slope=1,color="gray60",linetype="dashed") +
   geom_point() +
+  geom_text(aes(label=Adjective),color="gray60",size=2,vjust=1.5) +
   xlab("Intercept for Exp 1 (biased question)") +
   ylab("Intercept for Exp 3 (neutral question)")
 ggsave("../graphs/exp1vs3-interceptcorrelation.pdf",width=6.5,height=4.5)
