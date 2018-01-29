@@ -138,6 +138,7 @@ function make_slides(f) {
           "pre_check_response": this.pre_check_response,
           "context": this.stim.context,
           "question": this.stim.question,
+          "setup_phrase": this.stim.setup_phrase,
           "exchange": this.stim.exchange,
           "responsequestion": this.stim.responsequestion,
           "time": (new Date()) - this.trial_start,
@@ -193,12 +194,13 @@ function make_slides(f) {
     var speakerutt = name + " " + rawstim.speakerutt;
     var exchange = cond[1] == "know" ? rawstim.kexchange : rawstim.iexchange;
     var responsequestion = cond[1] == "know" ? rawstim.kresponsequestion : rawstim.iresponsequestion;
+    var setup_phrase = cond[1] == "know" ? rawstim.ksetup_phrase : rawstim.isetup_phrase;
 
     if (cond[0] != "filler") {
-      var answer = rawstim.answer +  " " + rawstim.audio_target + ".<strong>";
+      var answer = "Julie: <strong>" + setup_phrase + " " + rawstim.answer +  " " + rawstim.audio_target + ".<strong>";
       responsequestion = responsequestion + " " + rawstim.audio_filler + "?";
     } else {
-      var answer = rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
+      var answer = "Julie: <strong>" + setup_phrase + " " + rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
       responsequestion = responsequestion + " " + rawstim.audio_target + "?";
     }
 
@@ -209,7 +211,8 @@ function make_slides(f) {
       speakerutt: speakerutt,
       exchange: exchange,
       responsequestion: responsequestion,
-      answer: answer
+      answer: answer,
+      setup_phrase: setup_phrase,
     };
 
     stim.pcondition = cond[0];
@@ -231,8 +234,9 @@ function make_slides(f) {
     var speakerutt = name + " " + rawstim.speakerutt;
     var exchange = cond == "know" ? rawstim.kexchange : rawstim.iexchange;
     var responsequestion = cond == "know" ? rawstim.kresponsequestion : rawstim.iresponsequestion;
+    var setup_phrase = cond[1] == "know" ? rawstim.ksetup_phrase : rawstim.isetup_phrase;
 
-    var answer = rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
+    var answer = "Julie: <strong>" + setup_phrase + " " +  rawstim.answer + " " +rawstim.audio_filler + ".<strong>";
     responsequestion = responsequestion + " " + rawstim.audio_target + "?";
 
 
@@ -243,7 +247,8 @@ function make_slides(f) {
       speakerutt: speakerutt,
       exchange: exchange,
       responsequestion: responsequestion,
-      answer: answer
+      answer: answer,
+      setup_phrase: setup_phrase,
     };
 
     stim.pcondition = "control";
