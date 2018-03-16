@@ -21,6 +21,7 @@ function make_slides(f) {
  
     // PRESENT THE SLIDE
     present_handle: function(stim) {
+      console.log(stim);
       this.trial_start = new Date();
       this.stim = stim;
       this.type = stim.title;
@@ -280,8 +281,8 @@ function init() {
 
 // console.log(stimuli);
 
-  var stims = _.shuffle(stimuli); //can randomize between subject conditions here
-  // var stims = stimuli;
+  // var stims = _.shuffle(stimuli); //can randomize between subject conditions here
+  var stims = stimuli;
 
   for (j = 0; j< conditions.length; j++) {
     makeStim(stims[j],conditions[j]);
@@ -294,7 +295,7 @@ function init() {
 
 console.log(exp.all_stims);
 
-  exp.all_stims = _.shuffle(exp.all_stims);
+  //exp.all_stims = _.shuffle(exp.all_stims);
 
   console.log(exp.all_stims);
  

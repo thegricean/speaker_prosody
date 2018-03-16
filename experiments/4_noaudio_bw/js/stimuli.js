@@ -3,12 +3,12 @@ var stimuli = [
 
 {audio_target: "anxious",
   audio_filler: "hysterical",
-  icontext: "Mike is a doctor and runs into Julie on his way home. He briefly tells Julie about one of his patients that day, who was in a severe car accident. Several days later, Julie goes out to eat with her boyfriend Stan and Julie tells him about what she recalls her brief encounter with Mike.", 
-  kcontext: "Mike visited Julie at work to bring her something to eat. Julie is a doctor at a nearby hospital. Mike has to go back home, but Julie had to return to the hospital to see one last patient who was in a severe car accident. Upon getting home, Mike asks Julie about her last patient.", 
-  question: "Did Julie's patient get in a car accident?",  
+  icontext: "Julie is having lunch with Stan. She tells him about their friend Mike, who is a doctor and had to calm down a difficult patient today.", 
+  kcontext: "Julie is having lunch with Mike. She's a doctor and tells him about a difficult patient she had to calm down today.", 
+  question: "Does Julie know exactly what state the patient was in?",  
   speakerutt: "then asks Julie:", 
-  kexchange: "Mike: What does your patient feel like?",
-  iexchange: "Stan: What does his patient feel like?",
+  kexchange: "Mike: What did your patient feel like?",
+  iexchange: "Stan: What did his patient feel like?",
   ksetup_phrase: "Believe me,",
   isetup_phrase: "I don't know for sure, but",
   answer: "she was",
@@ -18,9 +18,9 @@ var stimuli = [
 
   {audio_target: "attractive",
   audio_filler: "beautiful",
-  icontext: "Mike tells Julie that his sister is in town to visit. Although Julie has never seen her in person, she has seen an old picture of her in a large group on Facebook. Later, Julie gets lunch with her boyfriend Stan. Stan's friend is looking for a blind date and Stan heard about Mike's sister being in town. Stan asks Julie what she knows about Mike's sister.", 
-  kcontext: "Julie's sister is in town to visit. She is currently between relationships and wouldn't mind going out on a date during her visit. During a break at work, Julie has a coffee with Mike and asks him whether some of his single friends that might be interested in a blind date with her sister. Mike asks Julie several questions about her sister.", 
-  question: "Is Julie's sister looking for a date?", 
+  icontext: "Julie is having a drink with Stan. She tells him that their friend Mike's sister Donna is in town to visit.", 
+  kcontext: "Julie is having a drink with Mike. She tells him that her sister Donna is in town to visit.", 
+  question: "Does Julie know exactly what Donna looks like?", 
   speakerutt: "then asks Julie:", 
   kexchange: "Mike: What does your sister look like?",
   iexchange: "Stan: What does his sister look like?",
@@ -35,8 +35,8 @@ var stimuli = [
 //target dirty
   {audio_target: "dirty",
   audio_filler: "filthy",
-  icontext: "Mike had to go out of town on an extended business trip. He gave his brother a key to his house to water his plants and feed his cats. Upon coming back, he noticed that his brother might have had a party in his house while he was away. Upon getting home, Mike got a call from Julie asking him out to drinks that night. Mike quickly told her no and explained over the phone what had happened. Later that night at the bar, Julie told her friend Stan what had happened to Mike.", 
-  kcontext: "Julie had to go out of town on an extended business trip. She gave her brother a key to her house to water the plants and feed her cats. Upon coming back, she noticed that her brother might have had a party in his house while she was away. Upon getting home, Julie got a call from Mike asking her out to drinks that night. After everything that had happened, she thought that she could use a drink and said yes. At the bar, Julie told her Mike about what had happened.", 
+  icontext: "Julie is having coffee with Stan. She tells him about their friend Mike, whose AirBnB guests had a huge party in his recently re-carpeted apartment.", 
+  kcontext: "Julie is having coffee with Mike. She tells him that her AirBnB guests had a huge party in her recently re-carpeted apartment.", 
   question: "Did Julie notice that her house was not clean?",   
   speakerutt: "then asks Julie:", 
   kexchange: "Mike: What did your carpet look like?",
@@ -360,7 +360,6 @@ audio_filler: "expensive",
   kresponsequestion: "Does Julie mean that her sister was",
   iresponsequestion: "Does Julie mean that his sister was"
 }];
-
 
 
 
