@@ -225,8 +225,8 @@ var stimuli = [
   ksetup_phrase: "Believe me,",
   isetup_phrase: "I don't know for sure, but",
   answer: "it was",
-  kresponsequestion: "Does Julie mean that her bridesmaid dress",
-  iresponsequestion: "Does Julie mean that his bridesmaid dress"
+  kresponsequestion: "Does Julie mean that her bridesmaid dress was",
+  iresponsequestion: "Does Julie mean that his bridesmaid dress was"
 },
 
 
@@ -254,13 +254,13 @@ var stimuli = [
   kcontext: "Mike and Julie are two friends at a party. Julie tells him that she was pretty unsatisfied with the AirBnB she booked on her last vacation.", 
   question: "Did Julie have a mold problem in her old apartment?",  
   speakerutt: "then asks Julie:", 
-  kexchange: "Mike: What was your bathroom like?",
-  iexchange: "Stan: What was his bathroom like?",
+  kexchange: "Mike: What was your AirBnB like?",
+  iexchange: "Stan: What was his AirBnB like?",
   ksetup_phrase: "Believe me,",
   isetup_phrase: "I don't know for sure, but",
   answer: "it was",
-  kresponsequestion: "Does Julie mean that her bathroom was",
-  iresponsequestion: "Does Julie mean that his bathroom was"
+  kresponsequestion: "Does Julie mean that her AirBnB was",
+  iresponsequestion: "Does Julie mean that his AirBnB was"
 }];
 
 var controls = [
