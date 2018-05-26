@@ -12,6 +12,11 @@ d2 = read.csv("../data/speaker_prosody2.csv")
 d = rbind(d1,d2)
 d$trial = d$slide_number_in_experiment - 2
 d = as.data.frame(sapply(d, function(x) gsub("\"", "", x)))
+# add strong adjective valence
+adjectives = data.frame(strong_adjective=unique(d$strong_adjective))
+adjectives$valence = c("positive","negative","negative","negative","positive","positive","negative","negative","negative","negative","negative","positive","positive","positive","negative","positive","negative","negative","positive","negative","negative","negative")
+
+d = left_join(d,adjectives,by=c("strong_adjective"))
 
 nrow(d)
 length(unique(d$workerid))
@@ -118,6 +123,26 @@ ggplot(agr, aes(x=condition_knowledge, y=Mean)) +
   facet_wrap(~trial_type,nrow=1)
 ggsave("../graphs/means_item.pdf",width=7.5)
 
+# get condition & item means
+agr_item = d %>%
+  group_by(weak_adjective,condition_knowledge,trial_type,valence) %>%
+  summarize(Mean = mean(response), CILow = ci.low(response), CIHigh = ci.high(response)) %>%
+  mutate(YMin = Mean - CILow, YMax = Mean + CIHigh)
+
+dodge = position_dodge(.9)
+
+ggplot(agr, aes(x=condition_knowledge, y=Mean)) +
+  geom_bar(stat="identity",fill="gray60",color="black") +
+  geom_errorbar(aes(ymin=YMin,ymax=YMax),width=.25) +
+  geom_line(data=agr_item,aes(group=weak_adjective,color=valence),alpha=.5,size=2) +
+  # geom_errorbar(data=agr_item,aes(ymin=YMin,ymax=YMax,color=weak_adjective),alpha=.5,width=.25) +
+  # geom_text(data=agr_item,aes(label=weak_adjective,color=weak_adjective)) +
+  xlab("Speaker knowledge") +
+  ylab("Mean rating (lower='no'=implicature)") +
+  facet_wrap(~trial_type,nrow=1)
+ggsave("../graphs/means_item_valence.pdf",width=7.5)
+
+
 
 ## analysis ##
 
@@ -132,7 +157,7 @@ cd = d %>%
 contrasts(cd$condition_knowledge)
 contrasts(cd$condition_prosody)
 
-m = lmer(response~ccondition_knowledge+ctrial + (1+ccondition_knowledge|workerid) + (1|weak_adjective), data=cd)  
+m = lmer(response~ccondition_knowledge+ctrial + (1+ccondition_knowledge|workerid) + (1+ccondition_knowledge|weak_adjective), data=cd)  
 summary(m)  
 
 table(cd$weak_adjective,cd$condition_knowledge)
