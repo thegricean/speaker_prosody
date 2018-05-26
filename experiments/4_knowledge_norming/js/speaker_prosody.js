@@ -281,8 +281,8 @@ function init() {
 
 // console.log(stimuli);
 
-  // var stims = _.shuffle(stimuli); //can randomize between subject conditions here
-  var stims = stimuli;
+  var stims = _.shuffle(stimuli); //can randomize between subject conditions here
+  // var stims = stimuli;
 
   for (j = 0; j< conditions.length; j++) {
     makeStim(stims[j],conditions[j]);
