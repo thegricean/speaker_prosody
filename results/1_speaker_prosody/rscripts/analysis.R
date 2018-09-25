@@ -4,6 +4,8 @@ source('helpers.R')
 # load required packages
 library(tidyverse)
 library(forcats)
+library(lme4)
+library(lmerTest)
 theme_set(theme_bw())
 
 # load raw data
@@ -39,7 +41,6 @@ table(d$gender)
 table(d$age)
 ggplot(d, aes(x=age)) +
   geom_histogram()
-
 
 d = d %>%
   select(workerid,weak_adjective,strong_adjective,condition_knowledge,condition_prosody,response,not_paid_attention,responsequestion,exchange,question,pre_check_response,context,num_plays,age,language,asses,gender,comments,Answer.time_in_minutes,trial)
@@ -142,6 +143,35 @@ contrasts(cd$not_paid_attention)
 
 m = lmer(response~ccondition_knowledge*ccondition_prosody+ctrial + (1+ccondition_prosody+ccondition_knowledge|workerid) + (1+ccondition_prosody|weak_adjective), data=cd)  
 summary(m)  
+
+# exploratory model - adjective valence 
+
+d.val = read.csv("../data/speaker_prosody.posnegcoding.csv")
+
+d.val$trial = d.val$slide_number_in_experiment - 2
+
+d.val = d.val %>%
+  select(workerid,weak_adjective,strong_adjective,condition_knowledge,condition_prosody,response,not_paid_attention,responsequestion,exchange,question,pre_check_response,context,num_plays,age,language,asses,gender,comments,Answer.time_in_minutes,trial,valence)
+
+no_attention.val = d.val %>%
+  group_by(workerid,condition_knowledge,condition_prosody) %>%
+  summarize(Mean = mean(response)) %>%
+  filter(Mean > .35 & condition_prosody == "control" | Mean < .65 & condition_prosody == "filler")
+bad_subjects.val = unique(no_attention.val$workerid)
+bad_subjects.val
+
+d.val = d.val %>%
+  filter(! workerid %in% bad_subjects.val)
+
+cd.val = d.val %>% 
+  filter(condition_prosody %in% c("neutral","RFR")) %>%
+  mutate(condition_prosody = fct_drop(condition_prosody)) %>%
+  mutate(ccondition_knowledge = myCenter(condition_knowledge), ccondition_prosody = myCenter(condition_prosody),cnot_paid_attention = myCenter(not_paid_attention),ctrial = myCenter(trial)) %>%
+  droplevels()
+
+m.val = lmer(response~valence*ccondition_prosody+ctrial + (1+ccondition_prosody+ccondition_knowledge|workerid) + (1+ccondition_prosody|weak_adjective), data=cd.val)  
+
+summary(m.val)  
 
 m.att = lmer(response~ccondition_knowledge*ccondition_prosody+cnot_paid_attention+ctrial + (1+ccondition_prosody+ccondition_knowledge|workerid) + (1+ccondition_prosody|weak_adjective), data=cd)  
 summary(m.att)  
